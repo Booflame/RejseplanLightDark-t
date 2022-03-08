@@ -9,12 +9,17 @@ const btn = document.querySelector('#theme-switcher');
 init();
 
 function init() {
-    let storedMode = localStorage.getItem('mode');
-    if (!storedMode) {
-        storedMode = DEFAULT_MODE;
-        localStorage.setItem('mode', DEFAULT_MODE);
+    try{
+        let storedMode = localStorage.getItem('mode');
+        if (!storedMode) {
+            storedMode = DEFAULT_MODE;
+            localStorage.setItem('mode', DEFAULT_MODE);
+        }
+        setMode(storedMode);
     }
-    setMode(storedMode);
+    catch(e){
+        alert(e.message);
+    }
 }
 
 function setMode(mode = DEFAULT_MODE) {
@@ -69,13 +74,13 @@ function ListDepartures(xmllist){
         li.innerHTML += `&nbsp Busnr: ${Departure2} ${line} <br>&nbsp Fra:  ${stop} &nbsp-&nbsp mod: ${direction} <br>&nbsp Afgang tidspunkt: ${time}`;
         li.innerHTML += `&nbsp <a href="https://www.google.com/maps/dir/?api=1&origin=${stop}&destination=${direction}&travelmode=transit" target="_blank">Se på kort her</a></p>`;
         list.appendChild(li);
-        if (i == 19)
+        if (i == 9)
           break;
     }
 }
-setInterval(function() { window.location.reload() }, 60000);
+// setInterval(function() { window.location.reload() }, 60000);
 
-let clear = document.getElementById("clear");
-clear.addEventListener('click', function(){
-    localStorage.removeItem("mode");
-});
+// let clear = document.getElementById("clear");
+// clear.addEventListener('click', function(){
+//     localStorage.removeItem("mode");
+// });
